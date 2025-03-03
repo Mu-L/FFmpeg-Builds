@@ -1,16 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/drobilla/serd.git"
-SCRIPT_COMMIT="19bd8dd62aca4f256616b129177aef277d87728e"
+SCRIPT_COMMIT="9766872b2ef28126a46f14f4c3d1070bc3116368"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    git-mini-clone "$SCRIPT_REPO" "$SCRIPT_COMMIT" serd
-    cd serd
-
     mkdir build && cd build
 
     local myconf=(

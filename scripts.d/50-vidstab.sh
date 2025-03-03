@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/georgmartius/vid.stab.git"
-SCRIPT_COMMIT="90c76aca2cb06c3ff6f7476a7cd6851b39436656"
+SCRIPT_COMMIT="d2d55a8988c8ed34a9f373ef53481bfbadb9b9fb"
 
 ffbuild_enabled() {
     [[ $VARIANT == lgpl* ]] && return -1
@@ -9,9 +9,6 @@ ffbuild_enabled() {
 }
 
 ffbuild_dockerbuild() {
-    git-mini-clone "$SCRIPT_REPO" "$SCRIPT_COMMIT_PINNED" vidstab
-    cd vidstab
-
     mkdir build && cd build
 
     local mycmake=(
