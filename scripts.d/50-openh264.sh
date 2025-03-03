@@ -1,25 +1,22 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/cisco/openh264.git"
-SCRIPT_COMMIT="c4156d5b76a9a8be6cbbeb36e62f35d5e5bd745e"
+SCRIPT_COMMIT="a85e11871c748eae11d056d93df644e2dcb1e80c"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    git-mini-clone "$SCRIPT_REPO" "$SCRIPT_COMMIT" openh264
-    cd openh264
-
     local myconf=(
         PREFIX="$FFBUILD_PREFIX"
         INCLUDE_PREFIX="$FFBUILD_PREFIX"/include/wels
         BUILDTYPE=Release
         DEBUGSYMBOLS=False
         LIBDIR_NAME=lib
-        CC="$FFBUILD_CROSS_PREFIX"gcc
-        CXX="$FFBUILD_CROSS_PREFIX"g++
-        AR="$FFBUILD_CROSS_PREFIX"ar
+        CC="$CC"
+        CXX="$CXX"
+        AR="$AR"
     )
 
     if [[ $TARGET == win32 ]]; then
@@ -31,6 +28,11 @@ ffbuild_dockerbuild() {
         myconf+=(
             OS=mingw_nt
             ARCH=x86_64
+        )
+    elif [[ $TARGET == winarm64 ]]; then
+        myconf+=(
+            OS=mingw_nt
+            ARCH=aarch64
         )
     elif [[ $TARGET == linux64 ]]; then
         myconf+=(
